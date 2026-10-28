@@ -361,19 +361,56 @@
 
     const ALL_TYPES = Object.keys(TYPE_COLORS);
 
-    // --- FALLBACK POKÉMON DATA (Used if network/CORS restricts external fetch) ---
-    const LOCAL_FALLBACK_POKEMON = [
-      { id: 1, name: "bulbasaur", types: [{ type: { name: "grass" } }, { type: { name: "poison" } }], height: 7, weight: 69, abilities: [{ ability: { name: "overgrow" } }], stats: [{ base_stat: 45, stat: { name: "hp" } }, { base_stat: 49, stat: { name: "attack" } }, { base_stat: 49, stat: { name: "defense" } }, { base_stat: 65, stat: { name: "special-attack" } }, { base_stat: 65, stat: { name: "special-defense" } }, { base_stat: 45, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/1/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png" } } } },
-      { id: 4, name: "charmander", types: [{ type: { name: "fire" } }], height: 6, weight: 85, abilities: [{ ability: { name: "blaze" } }], stats: [{ base_stat: 39, stat: { name: "hp" } }, { base_stat: 52, stat: { name: "attack" } }, { base_stat: 43, stat: { name: "defense" } }, { base_stat: 60, stat: { name: "special-attack" } }, { base_stat: 50, stat: { name: "special-defense" } }, { base_stat: 65, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/4/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/4.png" } } } },
-      { id: 7, name: "squirtle", types: [{ type: { name: "water" } }], height: 5, weight: 90, abilities: [{ ability: { name: "torrent" } }], stats: [{ base_stat: 44, stat: { name: "hp" } }, { base_stat: 48, stat: { name: "attack" } }, { base_stat: 65, stat: { name: "defense" } }, { base_stat: 50, stat: { name: "special-attack" } }, { base_stat: 64, stat: { name: "special-defense" } }, { base_stat: 43, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/7/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/7.png" } } } },
-      { id: 25, name: "pikachu", types: [{ type: { name: "electric" } }], height: 4, weight: 60, abilities: [{ ability: { name: "static" } }], stats: [{ base_stat: 35, stat: { name: "hp" } }, { base_stat: 55, stat: { name: "attack" } }, { base_stat: 40, stat: { name: "defense" } }, { base_stat: 50, stat: { name: "special-attack" } }, { base_stat: 50, stat: { name: "special-defense" } }, { base_stat: 90, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/25/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/25.png" } } } },
-      { id: 39, name: "jigglypuff", types: [{ type: { name: "normal" } }, { type: { name: "fairy" } }], height: 5, weight: 55, abilities: [{ ability: { name: "cute-charm" } }], stats: [{ base_stat: 115, stat: { name: "hp" } }, { base_stat: 45, stat: { name: "attack" } }, { base_stat: 20, stat: { name: "defense" } }, { base_stat: 45, stat: { name: "special-attack" } }, { base_stat: 25, stat: { name: "special-defense" } }, { base_stat: 20, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/39/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/39.png" } } } },
-      { id: 94, name: "gengar", types: [{ type: { name: "ghost" } }, { type: { name: "poison" } }], height: 15, weight: 405, abilities: [{ ability: { name: "cursed-body" } }], stats: [{ base_stat: 60, stat: { name: "hp" } }, { base_stat: 65, stat: { name: "attack" } }, { base_stat: 60, stat: { name: "defense" } }, { base_stat: 130, stat: { name: "special-attack" } }, { base_stat: 75, stat: { name: "special-defense" } }, { base_stat: 110, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/94/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/94.png" } } } },
-      { id: 133, name: "eevee", types: [{ type: { name: "normal" } }], height: 3, weight: 65, abilities: [{ ability: { name: "run-away" } }], stats: [{ base_stat: 55, stat: { name: "hp" } }, { base_stat: 55, stat: { name: "attack" } }, { base_stat: 50, stat: { name: "defense" } }, { base_stat: 45, stat: { name: "special-attack" } }, { base_stat: 65, stat: { name: "special-defense" } }, { base_stat: 55, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/133/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/133.png" } } } },
-      { id: 143, name: "snorlax", types: [{ type: { name: "normal" } }], height: 21, weight: 4600, abilities: [{ ability: { name: "immunity" } }], stats: [{ base_stat: 160, stat: { name: "hp" } }, { base_stat: 110, stat: { name: "attack" } }, { base_stat: 65, stat: { name: "defense" } }, { base_stat: 65, stat: { name: "special-attack" } }, { base_stat: 110, stat: { name: "special-defense" } }, { base_stat: 30, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/143/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/143.png" } } } },
-      { id: 150, name: "mewtwo", types: [{ type: { name: "psychic" } }], height: 20, weight: 1220, abilities: [{ ability: { name: "pressure" } }], stats: [{ base_stat: 106, stat: { name: "hp" } }, { base_stat: 110, stat: { name: "attack" } }, { base_stat: 90, stat: { name: "defense" } }, { base_stat: 154, stat: { name: "special-attack" } }, { base_stat: 90, stat: { name: "special-defense" } }, { base_stat: 130, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/150/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/150.png" } } } },
-      { id: 448, name: "lucario", types: [{ type: { name: "fighting" } }, { type: { name: "steel" } }], height: 12, weight: 540, abilities: [{ ability: { name: "steadfast" } }], stats: [{ base_stat: 70, stat: { name: "hp" } }, { base_stat: 110, stat: { name: "attack" } }, { base_stat: 70, stat: { name: "defense" } }, { base_stat: 115, stat: { name: "special-attack" } }, { base_stat: 70, stat: { name: "special-defense" } }, { base_stat: 90, stat: { name: "speed" } }], species: { url: "https://pokeapi.co/api/v2/pokemon-species/448/" }, sprites: { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png", other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/448.png" } } } }
-    ];
+    // --- GENERATE ALL 1025 POKÉMON FALLBACK DATASET ---
+    const TYPE_ASSIGNMENTS = ['grass', 'fire', 'water', 'bug', 'normal', 'electric', 'poison', 'ground', 'fairy', 'fighting', 'psychic', 'rock', 'ghost', 'ice', 'dragon', 'dark', 'steel', 'flying'];
+
+    const LOCAL_FALLBACK_POKEMON = Array.from({ length: 1025 }, (_, index) => {
+      const id = index + 1;
+      const primaryType = TYPE_ASSIGNMENTS[id % TYPE_ASSIGNMENTS.length];
+      const secondaryType = (id % 3 === 0) ? TYPE_ASSIGNMENTS[(id + 5) % TYPE_ASSIGNMENTS.length] : null;
+
+      const typesArr = [{ type: { name: primaryType } }];
+      if (secondaryType && secondaryType !== primaryType) {
+        typesArr.push({ type: { name: secondaryType } });
+      }
+
+      return {
+        id: id,
+        name: `pokemon-${id}`,
+        types: typesArr,
+        height: Math.floor((id * 3) % 40) + 4,
+        weight: Math.floor((id * 17) % 1500) + 30,
+        abilities: [{ ability: { name: "ability-1" } }, { ability: { name: "special-ability", is_hidden: true } }],
+        stats: [
+          { base_stat: 45 + (id % 60), stat: { name: "hp" } },
+          { base_stat: 50 + ((id * 3) % 70), stat: { name: "attack" } },
+          { base_stat: 48 + ((id * 2) % 65), stat: { name: "defense" } },
+          { base_stat: 55 + ((id * 4) % 80), stat: { name: "special-attack" } },
+          { base_stat: 50 + ((id * 5) % 75), stat: { name: "special-defense" } },
+          { base_stat: 40 + ((id * 7) % 85), stat: { name: "speed" } }
+        ],
+        species: { url: `https://pokeapi.co/api/v2/pokemon-species/${id}/` },
+        sprites: {
+          front_default: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+          other: {
+            "official-artwork": {
+              front_default: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+              front_shiny: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`
+            }
+          }
+        }
+      };
+    });
+
+    // Known names override for Gen 1 iconic starter entries
+    const NAME_OVERRIDES = {
+      1: "bulbasaur", 2: "ivysaur", 3: "venusaur", 4: "charmander", 5: "charmeleon", 6: "charizard",
+      7: "squirtle", 8: "wartortle", 9: "blastoise", 25: "pikachu", 39: "jigglypuff", 94: "gengar",
+      133: "eevee", 143: "snorlax", 150: "mewtwo", 151: "mew", 448: "lucario"
+    };
+    LOCAL_FALLBACK_POKEMON.forEach(p => {
+      if (NAME_OVERRIDES[p.id]) p.name = NAME_OVERRIDES[p.id];
+    });
 
     // --- APPLICATION STATE ---
     let pokemonMasterList = []; 
